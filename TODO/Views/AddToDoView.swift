@@ -10,13 +10,14 @@ import SwiftUI
 
 struct AddToDoView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var vm : ToDoViewModel
-   
+    @ObservedObject var vm: ToDoViewModel = .init()
+
 
 
     var body: some View {
         ZStack {
-            // الخلفية الضبابية العصرية
+
+            // Blur Background
             VisualEffectBlur(blurStyle: .systemUltraThinMaterial)
                 .edgesIgnoringSafeArea(.all)
 
@@ -27,7 +28,7 @@ struct AddToDoView: View {
                     .padding(.top, 10)
                     .foregroundStyle(Color.secondaryColor)
 
-                // إدخال العنوان مع أيقونة جميلة
+ 
                 HStack {
                     Image(systemName: "square.and.pencil")
                         .foregroundColor(.blue)
@@ -50,7 +51,7 @@ struct AddToDoView: View {
                 }
                 .padding(.horizontal)
 
-                // اختيار الأولوية باستخدام Segmented Picker
+
                 HStack {
                     
                     Image(systemName: "text.badge.checkmark")

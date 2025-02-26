@@ -10,8 +10,7 @@ import SwiftUI
 
 struct ToDoRowView: View {
     var todo: ToDoModel
-
-    
+    @ObservedObject var vm: ToDoViewModel = .init()
     var body: some View {
         HStack(spacing: 12) {
             // مؤشر الأولوية
@@ -52,9 +51,9 @@ struct ToDoRowView: View {
                 }
             }
             .padding()
-            .background(Color.backgroundColor) // خلفية بيضاء
-            .cornerRadius(10) // جعل التصميم ناعمًا
-            .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2) // إضافة ظل خفيف
+            .background(Color.backgroundColor)
+            .cornerRadius(10)
+            .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
             
         }
         .padding(.horizontal)

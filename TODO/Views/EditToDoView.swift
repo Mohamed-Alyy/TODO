@@ -11,15 +11,9 @@ import SwiftUI
 
 struct EditToDoView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var vm : ToDoViewModel
-    
-    @State private var title : String = ""
-    @State private var description : String = ""
-    @State private var isDone : Bool = false
-    @State private var date : Date = Date()
-    @State private var priority : Int = 1
-    
-    var taskToEdit : ToDoModel
+    @ObservedObject var vm : ToDoViewModel = ToDoViewModel()
+        
+    @State var taskToEdit : ToDoModel
    
 
     var body: some View {
@@ -87,7 +81,7 @@ struct EditToDoView: View {
 
                 // Button to add new todo
                 Button(action: {
-                    vm.updateTodo(id: taskToEdit.id, title: vm.taskTitle, description: vm.taskDescription, date: vm.taskDate, priority: vm.priority)
+                    vm.updateTodo(todo: taskToEdit)
                     dismiss()
                 }) {
                     Text("Save")
@@ -113,10 +107,10 @@ struct EditToDoView: View {
             .padding()
         }
         .onAppear {
-            vm.taskTitle = vm.selectedTodo?.title ?? ""
-            vm.taskDescription = vm.selectedTodo?.description ?? ""
-            vm.taskDate = vm.selectedTodo?.taskDate ?? Date()
-            vm.priority = vm.selectedTodo?.priority ?? 1
+            vm.taskTitle = taskToEdit.title
+            vm.taskDescription = taskToEdit.description ?? ""
+            vm.taskDate = taskToEdit.taskDate
+            vm.priority = taskToEdit.priority
         }
     }
     
@@ -124,6 +118,7 @@ struct EditToDoView: View {
     
 
 #Preview {
-    EditToDoView(taskToEdit:ToDoModel(title: ""))
-        .environmentObject(ToDoViewModel())
+    EditToDoView(taskToEdit: ToDoModel(title: "test"))
+        //.environmentObject(ToDoViewModel())
+      
 }

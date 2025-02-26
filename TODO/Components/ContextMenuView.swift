@@ -16,7 +16,8 @@ struct ContextMenuView: View {
             // اكمال المهمة
             Button(action: {
                 withAnimation(.spring()) {
-                    vm.toggleTaskCompletion(id: todo.id)
+                    //vm.toggleTaskCompletion(id: todo.id)
+                    vm.markAsCompleted(todo: todo)
                 }
             }) {
                 Label(todo.isCompleted ? "Mark as not done" : "Mark as done",
@@ -29,7 +30,7 @@ struct ContextMenuView: View {
             
             // تعديل المهمة
             Button(action: {
-                vm.selectedTodo = todo
+//                vm.selectedTodo = todo
                 showEditTodoView.toggle()
             }) {
                 Label("Edit", systemImage: "pencil.circle.fill")
