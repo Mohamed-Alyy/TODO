@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AddToDoView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var vm: ToDoViewModel = .init()
+    @EnvironmentObject var vm: ToDoViewModel //= .init()
 
 
 

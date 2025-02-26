@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ToDoRowView: View {
     var todo: ToDoModel
-    @ObservedObject var vm: ToDoViewModel = .init()
+    @EnvironmentObject var vm: ToDoViewModel// = .init()
     var body: some View {
         HStack(spacing: 12) {
             // مؤشر الأولوية
@@ -74,4 +74,5 @@ struct ToDoRowView: View {
     let task1 = ToDoModel(title: "Meeting with Team", description: "Discuss project progress", taskDate: Date(), isCompleted: false, priority: 3)
     
      ToDoRowView(todo: task1)
+        .environmentObject(ToDoViewModel())
 }

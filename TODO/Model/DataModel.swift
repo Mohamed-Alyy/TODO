@@ -11,11 +11,7 @@ import CoreData
 
 @objc(ToDoEntity)
 public class ToDoEntity: NSManagedObject {
-    
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<ToDoEntity> {
-        return NSFetchRequest<ToDoEntity>(entityName: "ToDoEntity")
-    }
-    
+  
     @NSManaged public var id : UUID
     @NSManaged public var title : String
     @NSManaged public var todoDescription : String?
@@ -27,7 +23,7 @@ public class ToDoEntity: NSManagedObject {
 
 
 extension ToDoEntity {
-    static func fetchRequestAll() -> NSFetchRequest<ToDoEntity> {
+    static func fetchRequest() -> NSFetchRequest<ToDoEntity> {
         NSFetchRequest<ToDoEntity>(entityName: "ToDoEntity")
     }
 }

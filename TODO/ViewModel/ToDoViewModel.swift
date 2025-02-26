@@ -25,6 +25,7 @@ class ToDoViewModel: ObservableObject {
     func fetchTodos(){
         allTodos = DataManger.shared.fetchTasks()
         sortTodos()
+        
     }
     
     
@@ -79,7 +80,7 @@ class ToDoViewModel: ObservableObject {
     
     func markAsCompleted(todo: ToDoModel) {
         var updatedTodo = todo
-        updatedTodo.isCompleted = true
+        updatedTodo.isCompleted.toggle()
         updateTodo(todo: updatedTodo)
         
         fetchTodos()

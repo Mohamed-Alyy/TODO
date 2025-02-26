@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 struct MainView: View {
-    @StateObject private var vm: ToDoViewModel = ToDoViewModel()
+    @EnvironmentObject private var vm: ToDoViewModel //= ToDoViewModel()
     
     @State var showAddTodoView: Bool = false
     @State var showEditeTodoView: Bool = false
@@ -67,44 +67,44 @@ struct MainView: View {
                            // }
                         } // Active tasks
                         
-                        //Completed tasks
+                       // Completed tasks
                 
-//    
-//                            Section(header: Text("Completed Tasks")
-//                                .frame(maxWidth: .infinity, alignment:.leading)) {
-//                                    ForEach(vm.completedTasks) { todo in
-//                                        ToDoRowView(todo: todo)
-//                                        
-//                                            .swipeActions(edge: .trailing) {
-//                                                // إضافة إجراءات السحب للوصول السريع
-//                                                Button(role: .destructive) {
-//                                                    vm.deleteToDo(todo: todo)
-//                                                } label: {
-//                                                    Label("delete", systemImage: "trash")
-//                                                }
-//                                                
-//                                            }
-//                                            .swipeActions(edge: .leading) {
-//                                                Button {
-//                                                    vm.markAsCompleted(todo: todo)
-//                                                } label: {
-//                                                    Label(
-//                                                        todo.isCompleted ? "Mark as un done" : "Mark as done",
-//                                                        systemImage: todo.isCompleted ? "circle" : "checkmark.circle"
-//                                                    )
-//                                                }
-//                                                .tint(todo.isCompleted ? .gray : .green)
-//                                            }
-//                                        
-//                                            .onTapGesture {
-//                                                vm.markAsCompleted(todo: todo)
-//                                            }
-//                                            .listRowBackground(Color.clear)
-//                                            .listRowInsets(EdgeInsets())
-//                                            .foregroundColor(.gray)
-//                                    }
-//                                
-//                                }//Completed tasks
+    
+                            Section(header: Text("Completed Tasks")
+                                .frame(maxWidth: .infinity, alignment:.leading)) {
+                                    ForEach(vm.completedTasks) { todo in
+                                        ToDoRowView(todo: todo)
+                                        
+                                            .swipeActions(edge: .trailing) {
+                                                // إضافة إجراءات السحب للوصول السريع
+                                                Button(role: .destructive) {
+                                                    vm.deleteToDo(todo: todo)
+                                                } label: {
+                                                    Label("delete", systemImage: "trash")
+                                                }
+                                                
+                                            }
+                                            .swipeActions(edge: .leading) {
+                                                Button {
+                                                    vm.markAsCompleted(todo: todo)
+                                                } label: {
+                                                    Label(
+                                                        todo.isCompleted ? "Mark as un done" : "Mark as done",
+                                                        systemImage: todo.isCompleted ? "circle" : "checkmark.circle"
+                                                    )
+                                                }
+                                                .tint(todo.isCompleted ? .gray : .green)
+                                            }
+                                        
+                                            .onTapGesture {
+                                                vm.markAsCompleted(todo: todo)
+                                            }
+                                            .listRowBackground(Color.clear)
+                                            .listRowInsets(EdgeInsets())
+                                            .foregroundColor(.gray)
+                                    }
+                                
+                                }//Completed tasks
                         
                     }//List
                     
@@ -144,13 +144,18 @@ struct MainView: View {
                     }// Hstack
                 } // Vstack
             } // Zstack
+//            .onAppear {
+//                //vm.fetchTodos()
+//            }
             
         }
         
     }
+        
 }
 
 #Preview {
     let todo: ToDoModel = .init( title: "Test", isCompleted: false)
     MainView (selectedTodo: todo)
+        .environmentObject(ToDoViewModel())
 }

@@ -11,10 +11,9 @@ import SwiftUI
 
 struct EditToDoView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var vm : ToDoViewModel = ToDoViewModel()
-        
-    @State var taskToEdit : ToDoModel
-   
+    @EnvironmentObject var vm: ToDoViewModel
+    
+    @State var taskToEdit: ToDoModel
 
     var body: some View {
         ZStack {
@@ -23,7 +22,7 @@ struct EditToDoView: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack(spacing: 20) {
-                Text("Edite ToDo")
+                Text("Edit ToDo")
                     .font(.title2)
                     .fontWeight(.bold)
                     .padding(.top, 10)
@@ -81,6 +80,11 @@ struct EditToDoView: View {
 
                 // Button to add new todo
                 Button(action: {
+                    taskToEdit.title = vm.taskTitle
+                    taskToEdit.description = vm.taskDescription
+                    taskToEdit.taskDate = vm.taskDate
+                    taskToEdit.priority = vm.priority
+                    
                     vm.updateTodo(todo: taskToEdit)
                     dismiss()
                 }) {
@@ -119,6 +123,6 @@ struct EditToDoView: View {
 
 #Preview {
     EditToDoView(taskToEdit: ToDoModel(title: "test"))
-        //.environmentObject(ToDoViewModel())
+        .environmentObject(ToDoViewModel())
       
 }

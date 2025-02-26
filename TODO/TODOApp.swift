@@ -11,6 +11,7 @@ import SwiftUI
 struct TODOApp: App {
     
     let dataManager : DataManger = DataManger()
+    @Environment(\.scenePhase) var scenePhase
  
    // @StateObject var vmtodo : ToDoViewModel  = ToDoViewModel()
     var body: some Scene {
@@ -21,5 +22,13 @@ struct TODOApp: App {
                 //.environmentObject(vmtodo)
                 .environment(\.managedObjectContext, dataManager.context)
         }
+        .onChange(of: scenePhase) { _, _ in
+            dataManager.saveContext()
+        }
+        
     }
+        
+        
+        
 }
+
